@@ -1,0 +1,26 @@
+{
+  "name": "PongBot",
+  "version": "1.0.0",
+  "description": "A simple Slackbot to alert a channel when the pingpong table is open",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "browserify": "^13.1.0",
+    "cors": "^2.7.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "firebase": "^3.2.1",
+    "request": "^2.74.0",
+    "uglify-js": "^2.7.0"
+  },
+  "engines": {
+    "node": "6.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

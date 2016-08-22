@@ -1,0 +1,48 @@
+html,
+body {
+    background: white;
+    font-family: 'Avenir';
+    -webkit-font-smoothing: antialiased;
+}
+
+.content {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    width: 600px;
+}
+
+.emoji {
+    font-size: 120px;
+}
+
+.btn {
+    padding: 20px 40px;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+    color: white;
+    font-family: 'Avenir';
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 4px;
+    border-radius: 999px;
+}
+
+.btn--inactive {
+    background: #2ecc71;
+}
+.btn--active {
+    background: #e74c3c;
+}
+
+.about {
+    margin-top: 40px;
+    color: #869ab1;
+    font-size: 1.7rem;
+}
