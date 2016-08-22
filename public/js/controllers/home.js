@@ -18,13 +18,8 @@ pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $s
     var d = new Date();
     var time = formatAMPM(d);
 
-    console.log(time);
-
-
     firebase.database().ref('/active').on('value', function(activeSnapshot) {
         var val = activeSnapshot.val();
-
-        console.log(val);
 
         if (val === true) {
             $scope.active = true;
