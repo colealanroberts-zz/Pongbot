@@ -19,29 +19,45 @@ var bot = new Slackbot({
     name  : 'pongbot'
 });
 
-var serverTime = firebase.database.ServerValue.TIMESTAMP;
-
 // Init Express
 var app = express();
 
+function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
 app.post('/active', function(req, res) {
+    var d = new Date();
+    var time = formatAMPM(d);
+
+    console.log(time);
+
     var params = {
         icon_emoji: ':table_tennis_paddle_and_ball:'
     };
 
     // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-    bot.postMessageToChannel('pingpong', 'A game started @ ' + serverTime, params, function(data) {
+    bot.postMessageToChannel('pingpong', 'A game started @ ' + time, params, function(data) {
         console.log(data);
     });
 });
 
 app.post('/inactive', function(req, res) {
+    var d = new Date();
+    var time = formatAMPM(d);
     var params = {
         icon_emoji: ':table_tennis_paddle_and_ball:'
     };
 
     // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-    bot.postMessageToChannel('pingpong', 'A game ended @ ' + serverTime, params, function(data) {
+    bot.postMessageToChannel('pingpong', 'A game ended @ ' + time, params, function(data) {
         console.log(data);
     });
 });
