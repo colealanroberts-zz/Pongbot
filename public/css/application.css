@@ -16,7 +16,8 @@ body {
 }
 
 .emoji {
-    font-size: 120px;
+    width: 222px;
+    margin: 0 auto 60px auto;
 }
 
 .btn {
