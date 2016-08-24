@@ -1,6 +1,10 @@
 pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $state, $interval, Time) {
     'use strict';
 
+    var v = 'version 0.0.1 - Built by Cole Roberts';
+
+    console.log(v);
+
     var game, gObj;
 
     game = firebase.database().ref('/game');
