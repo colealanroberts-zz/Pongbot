@@ -10,16 +10,18 @@ pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $s
     game = firebase.database().ref('/game');
     gObj = $firebaseObject(game);
 
-    gObj.$loaded()
-    .then(function() {
-        var gs = gObj;
+    function getGameState() {
+        gObj.$loaded()
+        .then(function() {
+            var gs = gObj;
 
-        if (gs.active === true) {
-            $scope.active = true;
-        } else {
-            $scope.active = false;
-        }
-    });
+            if (gs.active === true) {
+                $scope.active = true;
+            } else {
+                $scope.active = false;
+            }
+        });
+    }
 
     $scope.startGame = function() {
 
@@ -50,4 +52,7 @@ pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $s
 
         $scope.active = false;
     }
+
+    getGameState();
+    $interval(getGameState, 5000);
 });
