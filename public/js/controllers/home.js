@@ -54,5 +54,5 @@ pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $s
     }
 
     getGameState();
-    $interval(getGameState, 5000);
+    $interval(getGameState, 1000);
 });
