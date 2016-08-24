@@ -33,34 +33,34 @@ function formatAMPM(date) {
     return strTime;
 }
 
-app.post('/active', function(req, res) {
-    var d = new Date();
-    var time = formatAMPM(d);
-
-    console.log(time);
-
-    var params = {
-        icon_emoji: ':table_tennis_paddle_and_ball:'
-    };
-
-    // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-    bot.postMessageToChannel('pingpong', 'A game started @ ' + time, params, function(data) {
-        console.log(data);
-    });
-});
-
-app.post('/inactive', function(req, res) {
-    var d = new Date();
-    var time = formatAMPM(d);
-    var params = {
-        icon_emoji: ':table_tennis_paddle_and_ball:'
-    };
-
-    // define channel, where bot exist. You can adjust it there https://my.slack.com/services
-    bot.postMessageToChannel('pingpong', 'A game ended @ ' + time, params, function(data) {
-        console.log(data);
-    });
-});
+// app.post('/active', function(req, res) {
+//     var d = new Date();
+//     var time = formatAMPM(d);
+//
+//     console.log(time);
+//
+//     var params = {
+//         icon_emoji: ':table_tennis_paddle_and_ball:'
+//     };
+//
+//     // define channel, where bot exist. You can adjust it there https://my.slack.com/services
+//     bot.postMessageToChannel('pingpong', 'A game started @ ' + time, params, function(data) {
+//         console.log(data);
+//     });
+// });
+//
+// app.post('/ended', function(req, res) {
+//     var d = new Date();
+//     var time = formatAMPM(d);
+//     var params = {
+//         icon_emoji: ':table_tennis_paddle_and_ball:'
+//     };
+//
+//     // define channel, where bot exist. You can adjust it there https://my.slack.com/services
+//     bot.postMessageToChannel('pingpong', 'A game ended @ ' + time, params, function(data) {
+//         console.log(data);
+//     });
+// });
 
 
 // Enable cors

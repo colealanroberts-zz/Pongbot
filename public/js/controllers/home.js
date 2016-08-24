@@ -1,8 +1,10 @@
-pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $state) {
+pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $state, $interval, Time) {
 
-    var active, a;
+    var MINUTE = 1000;
 
-    var active = firebase.database().ref('/active');
+    var active, a, game;
+
+    game = firebase.database().ref('/game');
 
     function formatAMPM(date) {
         var hours = date.getHours();
@@ -15,36 +17,62 @@ pongbot.controller('HomeController', function($scope, $http, $firebaseObject, $s
         return strTime;
     }
 
-    var d = new Date();
-    var time = formatAMPM(d);
+    function getGameState() {
+        var gObj = $firebaseObject(game);
 
-    firebase.database().ref('/active').on('value', function(activeSnapshot) {
-        var val = activeSnapshot.val();
+        gObj.$loaded()
+        .then(function() {
+            console.log('Checking gamestate');
+            firebase.database().ref('/game').once('value').then(function(game) {
+                var gs = $firebaseObject(game);
 
-        if (val === true) {
-            $scope.active = true;
-        } else {
-            $scope.active = false;
-        }
+                console.log(gs);
+
+
+                if (gs === true) {
+                    $scope.active = true;
+                } else {
+                    $scope.active = false;
+                }
+            });
+        });
 
         $scope.$apply();
-    });
+    }
+
 
     $scope.startGame = function() {
+
+        console.log('startGame()');
+
         $http({
             method : 'POST',
             url    : '/active'
         });
 
-        active.set(true);
+        game.set({
+            active : true,
+            time   : Time.currentTime()
+        });
+
+        $scope.active = true;
     }
 
     $scope.endGame = function() {
+        console.log('endGame()');
+
         $http({
             method : 'POST',
-            url    : '/inactive'
+            url    : '/ended'
         });
 
-        active.set(false);
+        game.set({
+            active : false,
+            time   : Time.currentTime()
+        });
+
+        $scope.active = false;
     }
+
+    $interval(getGameState, MINUTE);
 });
